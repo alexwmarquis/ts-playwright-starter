@@ -2,14 +2,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-type TestSettings = {
-    axeWcagStandards: string[];
-    axeTestingEnabled: boolean;
-    axeReportingEnabled: boolean;
-    strictErrorModeEnabled: boolean;
-};
-
-export const testSettings: TestSettings = {
+export const testSettings = {
     axeWcagStandards: process.env.AXE_WCAG_STANDARDS?.split(",") || [
         "wcag2a",
         "wcag2aa",

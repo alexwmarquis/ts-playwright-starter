@@ -40,7 +40,6 @@ const eslintConfig = [
             "playwright/expect-expect": "error",
             "playwright/max-nested-describe": "error",
             "playwright/missing-playwright-await": "error",
-            "playwright/no-conditional-expect": "error",
             "playwright/no-element-handle": "error",
             "playwright/no-eval": "error",
             "playwright/no-focused-test": "error",
@@ -60,7 +59,8 @@ const eslintConfig = [
             "playwright/valid-expect": "error",
             "playwright/valid-title": "error",
             "playwright/no-skipped-test": "off",
-            "playwright/no-conditional-in-test": "off"
+            "playwright/no-conditional-in-test": "off",
+            "playwright/no-conditional-expect": "off"
         }
     }
 ];

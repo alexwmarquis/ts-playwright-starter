@@ -6,7 +6,7 @@ import { createHtmlReport } from "axe-html-reporter";
 import fs from "node:fs/promises";
 import { v4 as uuidv4 } from "uuid";
 
-import { testSettings } from "../types/test-settings";
+import { testSettings } from "../config/test-settings";
 
 export type Impact = "critical" | "serious" | "moderate" | "minor" | "potential";
 const impactScale: Record<Impact, number> = {

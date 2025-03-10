@@ -11,6 +11,7 @@ const config: PlaywrightTestConfig = {
         timeout: 5000
     },
     reporter: [["list"], ["html", { open: "on-failure" }]],
+    workers: process.env.CI ? 1 : undefined,
     use: {
         baseURL,
         video: "retain-on-failure",

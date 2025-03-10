@@ -1,5 +1,5 @@
 import { test } from "../../fixtures";
-import { testSettings } from "../../types";
+import { testSettings } from "../../config";
 
 /* eslint-disable playwright/expect-expect */
 test.skip(!testSettings.strictErrorModeEnabled);

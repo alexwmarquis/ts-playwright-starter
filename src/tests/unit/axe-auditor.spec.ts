@@ -1,6 +1,6 @@
 import { AxeAuditor } from "../../helpers";
 import { test, expect } from "../../fixtures";
-import { testSettings } from "../../types";
+import { testSettings } from "../../config";
 
 let axeAuditor: AxeAuditor;
 
@@ -36,7 +36,7 @@ test(`should return serious and critical violations for a mock page`, async ({ p
     expect.soft(violations.length).toBeGreaterThan(2);
 
     for (const violation of violations) {
-        expect.soft(violation.impact).toBeOneOfValues(["serious", "critical"]);
+        expect.soft(violation.impact).toMatch(/serious|critical/);
     }
 });
 
@@ -47,6 +47,6 @@ test(`should return critical violations for a mock page`, async ({ page }) => {
     expect.soft(violations.length).toBeGreaterThan(1);
 
     for (const violation of violations) {
-        expect.soft(violation.impact).toBeOneOfValues(["critical"]);
+        expect.soft(violation.impact).toMatch(/critical/);
     }
 });

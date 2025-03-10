@@ -30,13 +30,15 @@ test("should be able to checkout", { tag: "@regression" }, async () => {
         cardCvv: "123"
     });
 
-    await checkoutPage.firstNameInput.fill("");
+    await checkoutPage.firstName.fill("");
+
+    await expect.soft(checkoutPage.firstName).toHaveAttribute("required");
 
     await checkoutPage.continueToCheckout();
 
     expect.soft(await checkoutPage.validationErrors()).toContain("Valid first name is required.");
 
-    await checkoutPage.firstNameInput.fill("John");
+    await checkoutPage.firstName.fill("John");
 
     await checkoutPage.continueToCheckout();
 

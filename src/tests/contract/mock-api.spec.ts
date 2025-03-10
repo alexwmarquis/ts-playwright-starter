@@ -19,6 +19,7 @@ test("should allow writing contract tests for an API response", async ({ request
     const response = await request.get(endpoint);
 
     await expect(response).toBeOK();
+    expect(response.status()).toBe(200);
 
     const body = await response.json();
 

@@ -1,10 +1,26 @@
-import type { Page } from "@playwright/test";
+import type { Page, Locator } from "@playwright/test";
 
 export class BasePage {
-    constructor(protected readonly page: Page) {}
+    readonly mainNavigation: Locator;
+    readonly linkToHomePage: Locator;
+    readonly linkToExamplesPage: Locator;
 
-    async goto(url: string) {
+    constructor(protected readonly page: Page) {
+        this.mainNavigation = this.page.getByLabel("Main navigation");
+        this.linkToHomePage = this.mainNavigation.getByLabel("Bootstrap");
+        this.linkToExamplesPage = this.mainNavigation.getByRole("link", { name: "Examples" });
+    }
+
+    async goto(url: string): Promise<void> {
         await this.page.goto(url);
+    }
+
+    async goToHomePage(): Promise<void> {
+        await this.goto("https://getbootstrap.com/");
+    }
+
+    async goToExamplesPage(): Promise<void> {
+        await this.linkToExamplesPage.click();
     }
 
     async getPageHeadings(): Promise<string[]> {
@@ -13,11 +29,22 @@ export class BasePage {
         return texts.filter((text): text is string => text !== null);
     }
 
-    async pageHeading() {
+    async pageHeading(): Promise<Locator> {
         return this.page.getByRole("heading").first();
     }
 
-    async getPageTitle() {
+    async getPageTitle(): Promise<string> {
         return await this.page.title();
+    }
+
+    async validationErrors(): Promise<string[]> {
+        const errors = this.page.locator(".invalid-feedback:visible");
+        const errorElements = await errors.all();
+        const visibleTexts = await Promise.all(
+            errorElements
+                .filter(async (element) => await element.isVisible())
+                .map(async (element) => ((await element.textContent()) || "").trim())
+        );
+        return visibleTexts.filter((text) => text !== "");
     }
 }
