@@ -1,4 +1,5 @@
 import { test as base } from "@playwright/test";
+import { testSettings } from "../config";
 
 export const test = base.extend<{
     timeBomb: {
@@ -50,7 +51,7 @@ export const test = base.extend<{
 
         await use(page);
 
-        if (errors.length > 0) {
+        if (testSettings.strictErrorModeEnabled && errors.length > 0) {
             throw new Error(errors.join("\n").trim());
         }
     }

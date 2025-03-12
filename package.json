@@ -10,7 +10,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --check .",
-    "format:fix": "prettier --write ."
+    "format:fix": "prettier --write .",
+    "pre-commit": "npm run lint && npm run format",
+    "prepare": "husky"
   },
   "author": "Alex Marquis",
   "license": "ISC",
@@ -23,6 +25,7 @@
     "eslint": "^9.22.0",
     "eslint-plugin-playwright": "^2.2.0",
     "eslint-plugin-prettier": "^5.2.3",
+    "husky": "^9.1.7",
     "prettier": "^3.5.3"
   },
   "dependencies": {

@@ -30,7 +30,7 @@ test("should crawl all top-level discoverable pages and verify they load success
                 mainUrls.add(urlObj.href);
             }
         } catch (error: unknown) {
-            console.warn(`Invalid URL: ${href}`, { cause: error});
+            console.warn(`Invalid URL: ${href}`, { cause: error });
         }
     }
 

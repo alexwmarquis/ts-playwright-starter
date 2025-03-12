@@ -1,13 +1,9 @@
-A repository to capture the basic components of an effective end-to-end test suite written in
-Typescript leveraging Playwright's NodeJS runtime.
+# ts-playwright-starter
 
-What attributes does an effective end-to-end testing suite have?
+## Get Started
 
-- Strict error mode capabilities
-- Accessibility testing with Axe
-- Follows page object model pattern
-- A site crawler smoke test
-- Test tagging practices
-- Tests for mobile and desktop devices
-- Test steps
-- Uses auto-retrying assertions
+1. Clone the repository.
+2. Run the command `npm install`.
+3. Run the command `npx playwright install`.
+4. Run the command `npm run test`.
+5. Run the command `npx playwright show-report`.
