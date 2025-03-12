@@ -11,6 +11,8 @@ const config: PlaywrightTestConfig = {
     expect: { timeout: 5000 },
     reporter: [["list"], ["html", { open: "on-failure" }]],
     workers: process.env.CI ? 1 : undefined,
+    globalSetup: "./global-setup.ts",
+    globalTeardown: "./global-teardown.ts",
     use: {
         baseURL,
         video: "on",
