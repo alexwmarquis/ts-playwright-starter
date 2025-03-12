@@ -3,14 +3,8 @@ import tseslint from "typescript-eslint";
 import playwrightPlugin from "eslint-plugin-playwright";
 
 export default [
-    // Base config with ignores
     {
-        ignores: [
-            "**/dist/**",
-            "**/node_modules/**",
-            "**/playwright-report/**",
-            "**/axe-reports/**"
-        ]
+        ignores: ["**/node_modules/**", "**/playwright-report/**", "**/axe-reports/**"]
     },
 
     eslint.configs.recommended,

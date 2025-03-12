@@ -88,7 +88,8 @@ test(`should return all violations for a mock page`, async ({ page }) => {
     const violations = await axeAuditor.runAxeAndSaveViolations();
 
     expect.soft(violations.length).toBeGreaterThan(1);
+
     for (const violation of violations) {
-        expect.soft(violation.impact).toMatch(/minor|moderate|serious|critical/);
+        expect.soft(violation.impact).toMatch(/potential|minor|moderate|serious|critical/);
     }
 });

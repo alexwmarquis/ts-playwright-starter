@@ -5,7 +5,7 @@ test("should allow writing contract tests for DOM elements", async ({ page }) =>
     test.info().annotations.push({
         type: "Best Practice",
         description:
-            "Use the `.toBeEditable()` assertion to check if an element is editable. An element is editable if it is a text input, textarea, or contenteditable element. This type of visual contract testing can be valuable for smoke and accessibility testing where quick developer feedback is prioritized."
+            "Use the `.toBeEditable()` assertion to check if an element is editable. An element is editable if it is a text input, textarea, or contenteditable element. This type of contract testing can be valuable for smoke and accessibility testing where quick developer feedback is prioritized."
     });
 
     const homePage = new HomePage(page);

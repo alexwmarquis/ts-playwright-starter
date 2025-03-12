@@ -2,7 +2,7 @@ import { test, expect } from "../../fixtures";
 import type { Page, Locator } from "@playwright/test";
 import { AxeAuditor } from "../../helpers";
 
-interface InputParams {
+interface ExampleFormParams {
     email: string;
 }
 
@@ -17,7 +17,7 @@ class ExamplePage {
         this.alert = page.getByRole("alert");
     }
 
-    async fillForm(params: InputParams) {
+    async fillForm(params: ExampleFormParams) {
         await this.email.fill(params.email);
     }
 
