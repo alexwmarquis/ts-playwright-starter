@@ -1,30 +1,31 @@
 import type { Page, Locator } from "@playwright/test";
 
 export class BasePage {
+    readonly page: Page;
     readonly mainNavigation: Locator;
     readonly linkToHomePage: Locator;
     readonly linkToExamplesPage: Locator;
 
-    /* eslint-disable-next-line no-unused-vars */
-    constructor(protected readonly page: Page) {
+    constructor(page: Page) {
+        this.page = page;
         this.mainNavigation = this.page.getByLabel("Main navigation");
         this.linkToHomePage = this.mainNavigation.getByLabel("Bootstrap");
         this.linkToExamplesPage = this.mainNavigation.getByRole("link", { name: "Examples" });
     }
 
-    async goto(url: string): Promise<void> {
+    async goTo(url: string): Promise<void> {
         await this.page.goto(url);
     }
 
     async goToHomePage(): Promise<void> {
-        await this.goto("https://getbootstrap.com/");
+        await this.goTo("/");
     }
 
     async goToExamplesPage(): Promise<void> {
         await this.linkToExamplesPage.click();
     }
 
-    async getPageHeadings(): Promise<string[]> {
+    async pageHeadings(): Promise<string[]> {
         const headings = await this.page.locator("h1, h2, h3, h4, h5, h6").all();
         const texts = await Promise.all(headings.map((heading) => heading.textContent()));
         return texts.filter((text): text is string => text !== null);
@@ -34,7 +35,7 @@ export class BasePage {
         return this.page.getByRole("heading").first();
     }
 
-    async getPageTitle(): Promise<string> {
+    async pageTitle(): Promise<string> {
         return await this.page.title();
     }
 

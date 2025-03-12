@@ -16,7 +16,7 @@ test("should allow writing contract tests for DOM elements", async ({ page }) =>
     await homePage.goToExamplesPage();
     await examplesPage.goToCheckoutPage();
 
-    expect.soft(await checkoutPage.getPageTitle()).toContain("Checkout example");
+    expect.soft(await checkoutPage.pageTitle()).toContain("Checkout example");
     await expect.soft(await checkoutPage.pageHeading()).toHaveText("Checkout form");
 
     await expect.soft(checkoutPage.firstName).toBeEditable();
