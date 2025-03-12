@@ -2,6 +2,7 @@ import { test as base } from "@playwright/test";
 
 export const test = base.extend<{
     timeBomb: {
+        /* eslint-disable-next-line no-unused-vars */
         failAfter: (date: Date) => void;
     };
 }>({
@@ -50,7 +51,7 @@ export const test = base.extend<{
         await use(page);
 
         if (errors.length > 0) {
-            throw new Error(JSON.stringify(errors, null, 2));
+            throw new Error(errors.join("\n").trim());
         }
     }
 });

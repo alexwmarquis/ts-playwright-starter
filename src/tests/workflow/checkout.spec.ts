@@ -11,36 +11,48 @@ test.beforeEach(async ({ page }) => {
     checkoutPage = new CheckoutPage(page);
 });
 
-test("should be able to checkout", { tag: "@regression" }, async () => {
-    await homePage.goToHomePage();
-    await homePage.goToExamplesPage();
-    await examplesPage.goToCheckoutPage();
-    await checkoutPage.fillCheckoutForm({
-        firstName: "John",
-        lastName: "Doe",
-        username: "johndoe",
-        email: "john.doe@example.com",
-        address: "123 Main St",
-        state: "California",
-        zip: "12345",
-        country: "United States",
-        nameOnCard: "John Doe",
-        cardNumber: "1234567890123456",
-        cardExpiration: "12/2024",
-        cardCvv: "123"
+test("should be able to checkout", { tag: "@regression" }, async ({ page }) => {
+    await test.step("navigate to the checkout page", async () => {
+        await page.goto("https://getbootstrap.com/");
+
+        await homePage.goToExamplesPage();
+        await examplesPage.goToCheckoutPage();
     });
 
-    await checkoutPage.firstName.fill("");
+    await test.step("fill the checkout form", async () => {
+        await checkoutPage.fillCheckoutForm({
+            firstName: "John",
+            lastName: "Doe",
+            username: "johndoe",
+            email: "john.doe@example.com",
+            address: "123 Main St",
+            state: "California",
+            zip: "12345",
+            country: "United States",
+            nameOnCard: "John Doe",
+            cardNumber: "1234567890123456",
+            cardExpiration: "12/2024",
+            cardCvv: "123"
+        });
+    });
 
-    await expect.soft(checkoutPage.firstName).toHaveAttribute("required");
+    await test.step("verify form validation prevents incomplete submissions", async () => {
+        await checkoutPage.firstName.fill("");
 
-    await checkoutPage.continueToCheckout();
+        await expect.soft(checkoutPage.firstName).toHaveAttribute("required");
 
-    expect.soft(await checkoutPage.validationErrors()).toContain("Valid first name is required.");
+        await checkoutPage.continueToCheckout();
 
-    await checkoutPage.firstName.fill("John");
+        expect
+            .soft(await checkoutPage.validationErrors())
+            .toContain("Valid first name is required.");
+    });
 
-    await checkoutPage.continueToCheckout();
+    await test.step("verify the checkout form can be submitted successfully", async () => {
+        await checkoutPage.firstName.fill("John");
 
-    expect.soft(await checkoutPage.validationErrors()).toHaveLength(0);
+        await checkoutPage.continueToCheckout();
+
+        expect.soft(await checkoutPage.validationErrors()).toHaveLength(0);
+    });
 });

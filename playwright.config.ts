@@ -1,5 +1,6 @@
 import type { PlaywrightTestConfig } from "@playwright/test";
 import { devices } from "@playwright/test";
+import process from "node:process";
 
 export const baseURL = "http://getbootstrap.com";
 
@@ -7,14 +8,12 @@ const config: PlaywrightTestConfig = {
     testDir: "./src/tests",
     timeout: 10000,
     fullyParallel: true,
-    expect: {
-        timeout: 5000
-    },
+    expect: { timeout: 5000 },
     reporter: [["list"], ["html", { open: "on-failure" }]],
     workers: process.env.CI ? 1 : undefined,
     use: {
         baseURL,
-        video: "retain-on-failure",
+        video: "on",
         trace: "retain-on-failure",
         screenshot: "only-on-failure",
         headless: true

@@ -5,6 +5,7 @@ export class BasePage {
     readonly linkToHomePage: Locator;
     readonly linkToExamplesPage: Locator;
 
+    /* eslint-disable-next-line no-unused-vars */
     constructor(protected readonly page: Page) {
         this.mainNavigation = this.page.getByLabel("Main navigation");
         this.linkToHomePage = this.mainNavigation.getByLabel("Bootstrap");

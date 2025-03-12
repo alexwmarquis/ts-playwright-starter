@@ -8,7 +8,9 @@
     "test:regression": "npx playwright test --grep @regression",
     "test:smoke": "npx playwright test --grep-invert @regression",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write ."
   },
   "author": "Alex Marquis",
   "license": "ISC",
@@ -29,6 +31,7 @@
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",
     "typescript": "^5.8.2",
+    "typescript-eslint": "^8.26.1",
     "uuid": "^11.1.0"
   }
 }

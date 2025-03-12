@@ -4,18 +4,19 @@ import axe from "axe-core";
 import { createHtmlReport } from "axe-html-reporter";
 
 import fs from "node:fs/promises";
+import console from "node:console";
 import { v4 as uuidv4 } from "uuid";
 
 import { testSettings } from "../config/test-settings";
 
 export type Impact = "critical" | "serious" | "moderate" | "minor" | "potential";
-const impactScale: Record<Impact, number> = {
-    critical: 4,
-    serious: 3,
-    moderate: 2,
+export const impactScale = {
+    potential: 0,
     minor: 1,
-    potential: 0
-};
+    moderate: 2,
+    serious: 3,
+    critical: 4
+} as const;
 
 export class AxeAuditor {
     private page: Page;
@@ -25,7 +26,7 @@ export class AxeAuditor {
 
     constructor(
         page: Page,
-        impact: Impact = "critical",
+        impact: Impact = "potential",
         wcagStandards: string[] = testSettings.axeWcagStandards,
         testInfo: TestInfo = test.info()
     ) {

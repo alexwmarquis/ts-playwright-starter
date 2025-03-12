@@ -1,2 +1,2 @@
-export * from "./base-test";
 export * from "./base-expect";
+export * from "./base-test";
